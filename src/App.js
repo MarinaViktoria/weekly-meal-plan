@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import { useState } from "react";
+import uuid from "react-uuid";
 import './App.css';
+import MyList from './MyList';
+import MyMealsAndIngredients from './MyMealsAndIngredients';
 
 function App() {
+
+  const [mealPlans, setMealPlans] = useState([])
+  const addMeal = () => {
+    //console.log("it works!")
+    const newMeal = {
+      title: "Today is...",
+      id: uuid()
+    }
+    setMealPlans([newMeal, ...mealPlans])
+    console.log(newMeal)
+
+    const deleteDay = (mealId) => {
+      setMealPlans(mealPlans.filter(({id}) => id !== mealId))
+    }
+
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MyList mealPlansProp={mealPlans} addMealProp={addMeal} deleteDayProp={deleteDay}/>
+      <MyMealsAndIngredients/>
     </div>
   );
 }
-
 export default App;
