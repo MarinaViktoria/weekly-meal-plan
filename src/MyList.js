@@ -1,4 +1,5 @@
-const MyList = ({addMealProp, mealPlansProp, deleteDayProp}) => {
+const MyList = ({addMealProp, mealPlansProp, 
+    deleteDayProp, selectedDayProp, setSelectedDayProp}) => {
     return(
         <div>
         <div>
@@ -6,9 +7,11 @@ const MyList = ({addMealProp, mealPlansProp, deleteDayProp}) => {
             <button className="button-add" onClick={addMealProp}>Add</button>
         </div>
         <div>
-            {mealPlansProp.map(({id, title}) => (
-                <div>
-                    <p>{title}</p>
+            {mealPlansProp.map(({id, title, mealForADay}) => (
+                <div className={`meal ${id === selectedDayProp ? "selected" : "default"}`}
+                onClick={() => setSelectedDayProp(id)}>
+                    <p className="title">{title}</p>
+                    <p>{mealForADay}</p>
                     <button className="button-delete" onClick={() => deleteDayProp(id)}>Delete</button>
                 </div>
             ))}
