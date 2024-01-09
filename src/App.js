@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import uuid from "react-uuid";
 import './App.css';
 import MyList from './MyList';
@@ -6,15 +6,20 @@ import MyMealsAndIngredients from './MyMealsAndIngredients';
 
 function App() {
 
-  const [mealPlans, setMealPlans] = useState([]);
+  const [mealPlans, setMealPlans] = useState(
+    localStorage.mealPlans ? JSON.parse(localStorage.mealPlans) : []);
   const [selectedDay, setSelectedDay] = useState(false);
 
-  const addMeal = () => {
+  useEffect(() => {
+    localStorage.setItem("mealPlans", JSON.stringify(mealPlans))
+  }, [mealPlans])
+    const addMeal = () => {
     //console.log("it works!")
     const newMeal = {
       title: "Today is...",
       id: uuid(),
-      mealForADay: ""
+      mealForADay: "",
+      ingredients: ""
     }
     setMealPlans([newMeal, ...mealPlans])
     console.log(newMeal)

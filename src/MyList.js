@@ -11,7 +11,7 @@ const MyList = ({addMealProp, mealPlansProp,
                 <div className={`meal ${id === selectedDayProp ? "selected" : "default"}`}
                 onClick={() => setSelectedDayProp(id)}>
                     <p className="title">{title}</p>
-                    <p>{mealForADay}</p>
+                    <p className="text-field">{mealForADay.substring(0,60)}</p>
                     <button className="button-delete" onClick={() => deleteDayProp(id)}>Delete</button>
                 </div>
             ))}
